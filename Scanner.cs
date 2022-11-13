@@ -105,7 +105,12 @@ namespace Compilers
             State state = State.START;
             Token tempToken = new Token{ };
             string token_value = "";
-            while (streamReader.Peek() != -1 || state!=State.START)
+            bool error_flag=false;
+            bool nested_comment_error_flag=false;
+            /*the loop breaks in 2 cases , reaching end of file and consuming the last token so that we reach 
+            starting state again or error occurred so the scanning will not continue
+            */
+            while (!(streamReader.Peek() == -1 && state==State.START) && error_flag==false )
             {
                 c = (char)streamReader.Peek();//peak function doesnt consume the character
                 
@@ -226,6 +231,13 @@ namespace Compilers
                             state = State.DONE;
                             token_value += (char)streamReader.Read();
                             tempToken.t = TokenType.COMMENT;
+                            if(nested_comment_error_flag){
+                                state=State.ERROR;
+                            }
+                        }
+                        else if(c=='{'){
+                            nested_comment_error_flag=true;
+                            token_value += (char)streamReader.Read();
                         }
                         else
                         {
@@ -250,18 +262,25 @@ namespace Compilers
                         if(type==charType.letter || type==charType.number || type==charType.invalidEntry){
                             token_value+=(char)streamReader.Read();
                         }
-                        else{
+                        else{//program stops after these lines of code
                         tempToken.val = token_value;
                         tempToken.t=TokenType.ERROR;
                         tempToken.token_number = token_counter;
-                        token_counter++;
                         tokens.Add(tempToken);
                         state=State.START;
                         token_value = "";
+                        error_flag=true;
+                        }
+
+                        if(nested_comment_error_flag){
+                            Console.WriteLine("Nested comment detected , error state reached");
                         }
                     break; 
 
                 }
+            }
+            if(error_flag==true){
+                Console.WriteLine("error state reached , scanner is stopped");
             }
 
 
