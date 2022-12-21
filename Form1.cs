@@ -142,7 +142,7 @@ namespace Compilers
                     return;
                 }
                 Scanner.write(ref x);
-                Scanner.tokens.Clear(); // need to remove
+                Scanner.tokens.Clear();
                 x.Close();
                 outputFile.Text = File.ReadAllText(Path.Combine(inputPath, input_file_name + "_Scanned.txt"));
                 if (Scanner.error_flag == true)
@@ -224,7 +224,6 @@ namespace Compilers
                             temptoken.t = temptype;
                             Scanner.tokens.Add(temptoken);
                             streamReader.Read();
-                            //streamReader.Read();
                             c = "";
                             value = "";
                         }
@@ -272,8 +271,6 @@ namespace Compilers
 
         private void button1_Click(object sender, EventArgs e)
         {
-          //Microsoft.Msagl.Drawing.Graph  graph= new Microsoft.Msagl.Drawing.Graph("");
-            //Draw_Graph();
             if (file == null) {
                 MessageBox.Show("Please enter input file","Warning");
                 return;
@@ -332,8 +329,6 @@ namespace Compilers
             {
                 MessageBox.Show(ex.Message);
             }
-
-            //gViewer1.Graph = graph;
         }
 
         private void Btn_Browse_Click(object sender, EventArgs e)

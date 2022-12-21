@@ -98,15 +98,12 @@ namespace Compilers
             }
             else {  error = true;
                   }
-            //cout ("statement ok");
             return cur;
         }
         //
         private static Node if_stmt()
         {
-            //TreeNode node;
             Node cur = new Node (Scanner.TokenType.IF.ToString());
-            //cur.token_number = p;
             match(Scanner.TokenType.IF);
             cur.addchild(exp());
             match(Scanner.TokenType.THEN);
@@ -188,7 +185,6 @@ namespace Compilers
             
                 cur.addchild(n);
                 n1 = simple_exp();
-                //n1.token_number = p;
                 cur.addchild(n1);
                 n = cur;
 
@@ -210,10 +206,8 @@ namespace Compilers
                 
                 cur.addchild(n);
                 n1 = term();
-                //n1.token_number = p;
                 cur.addchild(n1);
                 n= cur;
-                //fe hena heta na2sa mlhash lazma
             }
             return n;
             
@@ -235,8 +229,6 @@ namespace Compilers
                
                 cur.addchild(n1);
                 n = cur;
-
-                //fe hena heta na2sa mlhash lazma
             }
             return n;
 
@@ -292,13 +284,11 @@ namespace Compilers
             else if (Scanner.tokens[p].t== Scanner.TokenType.MINUS)
             {
                 cur = new Node("OP\n(" + Scanner.tokens[p].val + ")");
-                //cur.token_number = p;
                 match(Scanner.TokenType.MINUS);
             }
             else
             {
                 error = true;
-                //cout("Expected + or - but found none.");
             }
             return cur;
         }
@@ -309,13 +299,11 @@ namespace Compilers
             Node cur = new Node("");
             if (Scanner.tokens[p].t ==Scanner.TokenType.MULT)
             {
-                //cur.token_number = p;
                 cur = new Node("OP\n(*)");
                 match(Scanner.TokenType.MULT);
             }
             else if (Scanner.tokens[p].t == Scanner.TokenType.DIV)
             {
-                //cur.token_number = p;
                 cur = new Node("OP\n(/)");
                 match(Scanner.TokenType.DIV);
             }
@@ -332,13 +320,11 @@ namespace Compilers
             Node cur=new Node("");
             if (Scanner.tokens[p].t== Scanner.TokenType.EQUAL)
             {
-                //cur.token_number = p;
                 cur = new Node("OP\n(=)");
                 match(Scanner.TokenType.EQUAL);
             }
             else if (Scanner.tokens[p].t== Scanner.TokenType.LESSTHAN)
             {
-                //cur.token_number = p;
                 match(Scanner.TokenType.LESSTHAN);
                 cur = new Node("OP\n(<)");
                 
@@ -346,13 +332,11 @@ namespace Compilers
             else
             {
                 error = true;
-                //cout("Expected < or = but found none.");
             }
             return cur;
         }
         private static void match(Scanner.TokenType expr)
         {
-            //skip comments
             if (p < Scanner.tokens.Count)
             {
                 if (expr == Scanner.tokens[p].t && p <= Scanner.tokens.Count - 1)
