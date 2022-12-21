@@ -1,24 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "F:\\VScodeworkspace\\Compilers1\\Compilers.csproj": {}
+    "D:\\Compilers repo\\Tiny-Language-Compiler\\Compilers.csproj": {}
   },
   "projects": {
-    "F:\\VScodeworkspace\\Compilers1\\Compilers.csproj": {
+    "D:\\Compilers repo\\Tiny-Language-Compiler\\Compilers.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "F:\\VScodeworkspace\\Compilers1\\Compilers.csproj",
+        "projectUniqueName": "D:\\Compilers repo\\Tiny-Language-Compiler\\Compilers.csproj",
         "projectName": "Compilers",
-        "projectPath": "F:\\VScodeworkspace\\Compilers1\\Compilers.csproj",
-        "packagesPath": "C:\\Users\\ahmed\\.nuget\\packages\\",
-        "outputPath": "F:\\VScodeworkspace\\Compilers1\\obj\\",
+        "projectPath": "D:\\Compilers repo\\Tiny-Language-Compiler\\Compilers.csproj",
+        "packagesPath": "C:\\Users\\Moamen\\.nuget\\packages\\",
+        "outputPath": "D:\\Compilers repo\\Tiny-Language-Compiler\\obj\\",
         "projectStyle": "PackageReference",
-        "fallbackFolders": [
-          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
-        ],
         "configFilePaths": [
-          "C:\\Users\\ahmed\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Users\\Moamen\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -61,7 +57,7 @@
               "version": "[4.3.4, )"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.101\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "F:\\programs\\dotnet\\sdk\\7.0.100\\RuntimeIdentifierGraph.json"
         }
       },
       "runtimes": {

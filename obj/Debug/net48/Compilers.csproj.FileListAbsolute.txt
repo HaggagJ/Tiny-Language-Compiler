@@ -65,3 +65,26 @@ F:\VScodeworkspace\Compilers1\obj\Debug\net48\Compilers.csproj.CoreCompileInputs
 F:\VScodeworkspace\Compilers1\obj\Debug\net48\Compilers.csproj.CopyComplete
 F:\VScodeworkspace\Compilers1\obj\Debug\net48\Compilers.exe
 F:\VScodeworkspace\Compilers1\obj\Debug\net48\Compilers.pdb
+D:\Compilers repo\Tiny-Language-Compiler\bin\Debug\net48\Compilers.exe.config
+D:\Compilers repo\Tiny-Language-Compiler\bin\Debug\net48\Compilers.exe
+D:\Compilers repo\Tiny-Language-Compiler\bin\Debug\net48\Compilers.pdb
+D:\Compilers repo\Tiny-Language-Compiler\bin\Debug\net48\Microsoft.Msagl.dll
+D:\Compilers repo\Tiny-Language-Compiler\bin\Debug\net48\Microsoft.Msagl.Drawing.dll
+D:\Compilers repo\Tiny-Language-Compiler\bin\Debug\net48\Microsoft.Msagl.GraphViewerGdi.dll
+D:\Compilers repo\Tiny-Language-Compiler\bin\Debug\net48\System.Configuration.ConfigurationManager.dll
+D:\Compilers repo\Tiny-Language-Compiler\bin\Debug\net48\System.Security.AccessControl.dll
+D:\Compilers repo\Tiny-Language-Compiler\bin\Debug\net48\System.Security.Permissions.dll
+D:\Compilers repo\Tiny-Language-Compiler\bin\Debug\net48\System.Security.Principal.Windows.dll
+D:\Compilers repo\Tiny-Language-Compiler\obj\Debug\net48\Compilers.csproj.AssemblyReference.cache
+D:\Compilers repo\Tiny-Language-Compiler\obj\Debug\net48\Compilers.csproj.SuggestedBindingRedirects.cache
+D:\Compilers repo\Tiny-Language-Compiler\obj\Debug\net48\Compilers.Form1.resources
+D:\Compilers repo\Tiny-Language-Compiler\obj\Debug\net48\Compilers.Form2.resources
+D:\Compilers repo\Tiny-Language-Compiler\obj\Debug\net48\Compilers.Properties.Resources.resources
+D:\Compilers repo\Tiny-Language-Compiler\obj\Debug\net48\Compilers.csproj.GenerateResource.cache
+D:\Compilers repo\Tiny-Language-Compiler\obj\Debug\net48\Compilers.GeneratedMSBuildEditorConfig.editorconfig
+D:\Compilers repo\Tiny-Language-Compiler\obj\Debug\net48\Compilers.AssemblyInfoInputs.cache
+D:\Compilers repo\Tiny-Language-Compiler\obj\Debug\net48\Compilers.AssemblyInfo.cs
+D:\Compilers repo\Tiny-Language-Compiler\obj\Debug\net48\Compilers.csproj.CoreCompileInputs.cache
+D:\Compilers repo\Tiny-Language-Compiler\obj\Debug\net48\Compilers.csproj.CopyComplete
+D:\Compilers repo\Tiny-Language-Compiler\obj\Debug\net48\Compilers.exe
+D:\Compilers repo\Tiny-Language-Compiler\obj\Debug\net48\Compilers.pdb

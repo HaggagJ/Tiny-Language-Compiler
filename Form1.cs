@@ -138,6 +138,7 @@ namespace Compilers
                     MessageBox.Show("The entered file is empty", "Alert");
                     x.Close();
                     Scanner.empty = false;
+                    label1.Text = " ";
                     return;
                 }
                 Scanner.write(ref x);
@@ -148,6 +149,7 @@ namespace Compilers
                 {
                     MessageBox.Show("Error State Is Reached", "Alert");
                     Scanner.error_flag = false;
+                    return;
                 }
                 else MessageBox.Show("The file has been Scanned Successfully", "INFO!");
 
@@ -289,7 +291,8 @@ namespace Compilers
             if(Scanner.error_flag == true)
             {
                 MessageBox.Show("Scanner error, cannot parse, check your syntax!", "Warning");
-                Scanner.error_flag = false; 
+                Scanner.error_flag = false;
+                Scanner.tokens.Clear();
                 return;
             }
             Parser d = new Parser();
