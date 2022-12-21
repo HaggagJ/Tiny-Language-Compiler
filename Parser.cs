@@ -19,16 +19,27 @@ namespace Compilers
         public static bool error;
 
         static Form1 e = new Form1();
+
         public Node parse()
         {
 
 
+            if(Scanner.tokens.Count == 0)
+            {
+                error = true;
+                return null;
+            }
+            for(int i =0; i<Scanner.tokens.Count; i++)
+            {
+                if (Scanner.tokens[i].t == Scanner.TokenType.COMMENT)
+                {
+                    Scanner.tokens.RemoveAt(i);
+                } 
+            }  
             Node root = stmt_seq();
             if (p < Scanner.tokens.Count)
             {
                 error = true;
-                
-                
             }
             p= 0;
             return root;
@@ -43,9 +54,10 @@ namespace Compilers
             Scanner.Token tok = new Scanner.Token();
             if (p < Scanner.tokens.Count)
                 tok = Scanner.tokens[p];
+            else return cur;
             while (tok.t == Scanner.TokenType.SEMICOLON && p != Scanner.tokens.Count - 1)
             {
-                match(Scanner.TokenType.SEMICOLON, Scanner.tokens[p].t);
+                match(Scanner.TokenType.SEMICOLON);
                 cur.addSibling(statement());
                 cur = cur.r_sib;
                 if (p < Scanner.tokens.Count)
@@ -59,8 +71,6 @@ namespace Compilers
        
         private static Node statement()
         {
-            //node = node.Nodes.Add("statement");
-            //skip comments
             Node cur = new Node("");
             while (p < Scanner.tokens.Count-1 &&( Scanner.tokens[p].t == Scanner.TokenType.COMMENT)  )
             {
@@ -97,19 +107,19 @@ namespace Compilers
             //TreeNode node;
             Node cur = new Node (Scanner.TokenType.IF.ToString());
             //cur.token_number = p;
-            match(Scanner.TokenType.IF, Scanner.tokens[p].t);
+            match(Scanner.TokenType.IF);
             cur.addchild(exp());
-            match(Scanner.TokenType.THEN, Scanner.tokens[p].t);
+            match(Scanner.TokenType.THEN);
             cur.addchild(stmt_seq());
             Scanner.Token n = new Scanner.Token();
             if(p<Scanner.tokens.Count)
                 n=Scanner.tokens[p];
             if (n.t == Scanner.TokenType.ELSE)
             {
-                match(Scanner.TokenType.ELSE, Scanner.tokens[p].t);
+                match(Scanner.TokenType.ELSE);
                 cur.addchild(stmt_seq());
             }
-            match(Scanner.TokenType.END, Scanner.tokens[p].t);
+            match(Scanner.TokenType.END);
             return cur;
         }
 
@@ -118,9 +128,9 @@ namespace Compilers
         {
             Node cur = new Node(Scanner.TokenType.REPEAT.ToString());
             //cur.token_number = p;
-            match(Scanner.TokenType.REPEAT, Scanner.tokens[p].t);
+            match(Scanner.TokenType.REPEAT);
             cur.addchild(stmt_seq());
-            match(Scanner.TokenType.UNTIL, Scanner.tokens[p].t);
+            match(Scanner.TokenType.UNTIL);
             cur.addchild(exp());
             return cur;
           
@@ -129,10 +139,10 @@ namespace Compilers
         //read-stmt -> read IDENTIFIER
         private static Node read_stmt()
         {
-            match(Scanner.TokenType.READ, Scanner.tokens[p].t);
+            match(Scanner.TokenType.READ);
             Node cur =new Node( Scanner.TokenType.READ.ToString() + "\n(" + Scanner.tokens[p].val+ ")");
             //cur.token_number = p;
-            match(Scanner.TokenType.IDENTIFIER, Scanner.tokens[p].t);
+            match(Scanner.TokenType.IDENTIFIER);
             return cur;
         }
 
@@ -142,7 +152,7 @@ namespace Compilers
             //TreeNode node;
             Node cur=new Node( Scanner.TokenType.WRITE.ToString());
             //cur.token_number = p;
-            match(Scanner.TokenType.WRITE, Scanner.tokens[p].t);
+            match(Scanner.TokenType.WRITE);
             cur.addchild(exp());
             return cur;
         }
@@ -153,8 +163,8 @@ namespace Compilers
             //TreeNode node;
             Node cur=new Node(Scanner.TokenType.ASSIGN.ToString()+ "\n(" + Scanner.tokens[p].val+")");
             //cur.token_number = p;
-            match(Scanner.TokenType.IDENTIFIER, Scanner.tokens[p].t);
-            match(Scanner.TokenType.ASSIGN, Scanner.tokens[p].t);
+            match(Scanner.TokenType.IDENTIFIER);
+            match(Scanner.TokenType.ASSIGN);
             cur.addchild(exp());
             return cur;
         }
@@ -238,27 +248,27 @@ namespace Compilers
             if (Scanner.tokens[p].t == Scanner.TokenType.NUMBER) { 
                 cur=new Node("CONST\n(" + Scanner.tokens[p].val+ ")");
                 //cur.token_number = p;
-                match(Scanner.tokens[p].t, Scanner.TokenType.NUMBER);
+                match(Scanner.tokens[p].t);
             }
 
             else if (Scanner.tokens[p].t == Scanner.TokenType.OPENBRACKET)
             {
                 
-                match(Scanner.TokenType.OPENBRACKET, Scanner.tokens[p].t);
+                match(Scanner.TokenType.OPENBRACKET);
                 cur=exp();
-                match(Scanner.TokenType.CLOSEDBRACKET, Scanner.tokens[p].t);
+                match(Scanner.TokenType.CLOSEDBRACKET);
             }
             else if (Scanner.tokens[p].t == Scanner.TokenType.IDENTIFIER)
             {
                 cur=new Node("ID\n(" + Scanner.tokens[p].val+ ")");
                 //cur.token_number = p;
-                match(Scanner.TokenType.IDENTIFIER, Scanner.tokens[p].t);
+                match(Scanner.TokenType.IDENTIFIER);
             }
             else if(Scanner.tokens[p].t == Scanner.TokenType.MINUS)
             {
-                match(Scanner.TokenType.MINUS, Scanner.tokens[p].t);//match minus need number
+                match(Scanner.TokenType.MINUS);//match minus need number
                 cur = new Node("CONST\n(-" + Scanner.tokens[p].val + ")");
-                match(Scanner.tokens[p].t, Scanner.TokenType.NUMBER);
+                match(Scanner.TokenType.NUMBER);
             }
             else
             {
@@ -276,14 +286,14 @@ namespace Compilers
                 
                 cur = new Node("OP\n(" + Scanner.tokens[p].val + ")");
                 //cur.token_number = p;
-                match(Scanner.tokens[p].t, Scanner.TokenType.PLUS);
+                match(Scanner.TokenType.PLUS);
      
             }
             else if (Scanner.tokens[p].t== Scanner.TokenType.MINUS)
             {
                 cur = new Node("OP\n(" + Scanner.tokens[p].val + ")");
                 //cur.token_number = p;
-                match(Scanner.TokenType.MINUS, Scanner.tokens[p].t);
+                match(Scanner.TokenType.MINUS);
             }
             else
             {
@@ -301,19 +311,17 @@ namespace Compilers
             {
                 //cur.token_number = p;
                 cur = new Node("OP\n(*)");
-                match(Scanner.TokenType.MULT, Scanner.tokens[p].t);
+                match(Scanner.TokenType.MULT);
             }
             else if (Scanner.tokens[p].t == Scanner.TokenType.DIV)
             {
                 //cur.token_number = p;
                 cur = new Node("OP\n(/)");
-                match(Scanner.TokenType.DIV, Scanner.tokens[p].t);
+                match(Scanner.TokenType.DIV);
             }
             else
             {
                 error = true;
-               
-                // qDebug() << QString::fromStdString("mulop error" + to_string(Parser_index));
             }
             return cur;
         }
@@ -326,12 +334,12 @@ namespace Compilers
             {
                 //cur.token_number = p;
                 cur = new Node("OP\n(=)");
-                match(Scanner.tokens[p].t, Scanner.TokenType.EQUAL);
+                match(Scanner.TokenType.EQUAL);
             }
             else if (Scanner.tokens[p].t== Scanner.TokenType.LESSTHAN)
             {
                 //cur.token_number = p;
-                match(Scanner.tokens[p].t, Scanner.TokenType.LESSTHAN);
+                match(Scanner.TokenType.LESSTHAN);
                 cur = new Node("OP\n(<)");
                 
             }
@@ -342,21 +350,23 @@ namespace Compilers
             }
             return cur;
         }
-        private static void match(Scanner.TokenType expr, Scanner.TokenType input)
+        private static void match(Scanner.TokenType expr)
         {
             //skip comments
-            while (Scanner.tokens[p].t == Scanner.TokenType.COMMENT && p < Scanner.tokens.Count)
+            if (p < Scanner.tokens.Count)
             {
-                p++;
-                input = Scanner.tokens[p].t;
-            }
-            if (expr == input && p < Scanner.tokens.Count)
-            {
-                p++; 
+                if (expr == Scanner.tokens[p].t && p <= Scanner.tokens.Count - 1)
+                {
+                    p++;
+                }
+                else
+                {
+                    error = true;
+                }
             }
             else
             {
-                error = true;
+                error=true;
             }
         }
         

@@ -28,6 +28,7 @@ namespace Compilers
     class Scanner
     {
         public static bool error_flag = false;
+        public static bool empty = false;
         public enum State
         {
             START,
@@ -274,17 +275,18 @@ namespace Compilers
                         }
 
                         if(nested_comment_error_flag){
-                            Console.WriteLine("Nested comment detected , error state reached");
+                            error_flag = true;
+                          
                         }
                     break; 
 
                 }
             }
-            if(error_flag==true){
-                Console.WriteLine("error state reached , scanner is stopped");
+            if(tokens.Count==0){
+                empty = true;
             }
-
-
+            else { empty = false; }
+            streamReader.Close();
         }
         public static void write(ref StreamWriter x)
         {

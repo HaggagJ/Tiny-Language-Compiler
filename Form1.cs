@@ -133,6 +133,13 @@ namespace Compilers
                 StreamWriter x = new StreamWriter(output_path, false);
                 Scanner.tokens.Clear();
                 Scanner.getTokens(input_path);
+                if (Scanner.empty == true)
+                {
+                    MessageBox.Show("The entered file is empty", "Alert");
+                    x.Close();
+                    Scanner.empty = false;
+                    return;
+                }
                 Scanner.write(ref x);
                 Scanner.tokens.Clear(); // need to remove
                 x.Close();
@@ -140,7 +147,7 @@ namespace Compilers
                 if (Scanner.error_flag == true)
                 {
                     MessageBox.Show("Error State Is Reached", "Alert");
-                    error_flag = false;
+                    Scanner.error_flag = false;
                 }
                 else MessageBox.Show("The file has been Scanned Successfully", "INFO!");
 
@@ -196,6 +203,7 @@ namespace Compilers
                 string value = "";
                 Scanner.Token temptoken = new Scanner.Token { };
                 Scanner.TokenType temptype;
+                bool isvalid=true;
                 while (!streamReader.EndOfStream)
                 {
                     c += (char)streamReader.Read();
@@ -207,19 +215,37 @@ namespace Compilers
                     }
                     if (streamReader.Peek() == 10 || streamReader.Peek() == 13 || (char)streamReader.Peek() == '\t' )
                         {               
-                        temptoken.val = value;
-                        Enum.TryParse<Scanner.TokenType>(c, out temptype);
-                        temptoken.t = temptype;
-                        Scanner.tokens.Add(temptoken);
-                        streamReader.Read();
-                        //streamReader.Read();
-                        c = "";
-                        value = "";
+                        isvalid=Enum.TryParse<Scanner.TokenType>(c, out temptype);
+                        if (isvalid)
+                        {
+                            temptoken.val = value;
+                            temptoken.t = temptype;
+                            Scanner.tokens.Add(temptoken);
+                            streamReader.Read();
+                            //streamReader.Read();
+                            c = "";
+                            value = "";
+                        }
+                        else
+                        {
+                            break;
+                        }
                     }
-
-
+                }
+                if (!isvalid)
+                {
+                    Scanner.tokens.Clear();
+                    streamReader.Close();
+                    MessageBox.Show("Error in token file", "Warning");
+                    return;
                 }
                 streamReader.Close();
+                if (Scanner.tokens.Count == 0)
+                {
+                    MessageBox.Show("Token file is empty", "Warning");
+                    return;
+                }    
+                
             }
             catch (Exception x)
             {
@@ -254,9 +280,16 @@ namespace Compilers
             if (!tokenFlag) {
                 Scanner.getTokens(file);
             }
+            if (Scanner.empty == true)
+            {
+                MessageBox.Show("The entered file is empty", "Alert");
+                Scanner.empty = false;
+                return;
+            }
             if(Scanner.error_flag == true)
             {
-                MessageBox.Show("Please enter code file!", "Warning");
+                MessageBox.Show("Scanner error, cannot parse, check your syntax!", "Warning");
+                Scanner.error_flag = false; 
                 return;
             }
             Parser d = new Parser();
@@ -265,11 +298,11 @@ namespace Compilers
             {
                 MessageBox.Show("Please check your code", "Parsing erorr",
                         MessageBoxButtons.OK, MessageBoxIcon.Error);
+                Parser.error = false;
                 return;
             }
-
-         
             draw(root);
+
             if(!tokenFlag)
             {
                 Scanner.tokens.Clear();
@@ -312,17 +345,7 @@ namespace Compilers
                 {
                     return;
                 }
-                //StreamReader streamReader= new StreamReader(ofd.FileName);
-                //while (!streamReader.EndOfStream)
-                //{
-                //    if ((char)streamReader.Read() == ',')
-                //    {
-                //        MessageBox.Show("Please enter valid code file", "Warning");
-                //        return;
-                //    }
-                //}
                 tokenFlag = false;
-                //streamReader.Close();
                 inputFile.Text = File.ReadAllText(ofd.FileName);
                 file = ofd.FileName;
                 input_file_name = System.IO.Path.GetFileNameWithoutExtension(file);
