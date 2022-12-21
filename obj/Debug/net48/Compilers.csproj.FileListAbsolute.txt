@@ -52,7 +52,6 @@ F:\VScodeworkspace\Compilers1\bin\Debug\net48\System.Configuration.Configuration
 F:\VScodeworkspace\Compilers1\bin\Debug\net48\System.Security.AccessControl.dll
 F:\VScodeworkspace\Compilers1\bin\Debug\net48\System.Security.Permissions.dll
 F:\VScodeworkspace\Compilers1\bin\Debug\net48\System.Security.Principal.Windows.dll
-F:\VScodeworkspace\Compilers1\obj\Debug\net48\Compilers.csproj.AssemblyReference.cache
 F:\VScodeworkspace\Compilers1\obj\Debug\net48\Compilers.csproj.SuggestedBindingRedirects.cache
 F:\VScodeworkspace\Compilers1\obj\Debug\net48\Compilers.Form1.resources
 F:\VScodeworkspace\Compilers1\obj\Debug\net48\Compilers.Form2.resources
