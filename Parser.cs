@@ -24,11 +24,7 @@ namespace Compilers
         {
 
 
-            if(Scanner.tokens.Count == 0)
-            {
-                error = true;
-                return null;
-            }
+           
             for(int i =0; i<Scanner.tokens.Count; i++)
             {
                 if (Scanner.tokens[i].t == Scanner.TokenType.COMMENT)
@@ -36,7 +32,12 @@ namespace Compilers
                     Scanner.tokens.RemoveAt(i);
                     i--;
                 } 
-            }  
+            }
+            if (Scanner.tokens.Count == 0)
+            {
+                error = true;
+                return null;
+            }
             Node root = stmt_seq();
             if (p < Scanner.tokens.Count)
             {
