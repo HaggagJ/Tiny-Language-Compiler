@@ -87,3 +87,4 @@ D:\Compilers repo\Tiny-Language-Compiler\obj\Debug\net48\Compilers.csproj.CoreCo
 D:\Compilers repo\Tiny-Language-Compiler\obj\Debug\net48\Compilers.csproj.CopyComplete
 D:\Compilers repo\Tiny-Language-Compiler\obj\Debug\net48\Compilers.exe
 D:\Compilers repo\Tiny-Language-Compiler\obj\Debug\net48\Compilers.pdb
+F:\VScodeworkspace\Compilers1\obj\Debug\net48\Compilers.csproj.AssemblyReference.cache

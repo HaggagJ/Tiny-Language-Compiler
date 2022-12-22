@@ -7,7 +7,7 @@
     <UseWindowsForms>true</UseWindowsForms>
     <ImplicitUsings>enable</ImplicitUsings>
 	  <LangVersion>Latest</LangVersion>
-	  <ApplicationIcon>computer-multi-size.ico</ApplicationIcon>
+	  <ApplicationIcon>compiler-4023736-3343620.ico</ApplicationIcon>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
@@ -19,7 +19,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Content Include="computer-multi-size.ico" />
+    <Content Include="compiler-4023736-3343620.ico" />
   </ItemGroup>
 
   <ItemGroup>

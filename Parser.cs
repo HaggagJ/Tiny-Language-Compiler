@@ -34,6 +34,7 @@ namespace Compilers
                 if (Scanner.tokens[i].t == Scanner.TokenType.COMMENT)
                 {
                     Scanner.tokens.RemoveAt(i);
+                    i--;
                 } 
             }  
             Node root = stmt_seq();
