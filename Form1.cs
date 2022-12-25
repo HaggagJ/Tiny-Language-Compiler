@@ -206,18 +206,21 @@ namespace Compilers
                 Scanner.Token temptoken = new Scanner.Token { };
                 Scanner.TokenType temptype;
                 bool isvalid=true;
+                bool beforecomma = true;//this will be used to handle comments with \n
                 while (!streamReader.EndOfStream)
                 {
                     c += (char)streamReader.Read();
-                    if ((char)streamReader.Peek() == ',')
+                    if (beforecomma &&(char)streamReader.Peek() == ',')
                     {
                         value = c;
                         streamReader.Read();//skip comma
                         c = "";
+                        beforecomma = false;   
                     }
-                    if (streamReader.Peek() == 10 || streamReader.Peek() == 13 || (char)streamReader.Peek() == '\t' )
+                    if ( !beforecomma && (streamReader.Peek() == 10 || streamReader.Peek() == 13 || (char)streamReader.Peek() == '\t' ))
                         {               
                         isvalid=Enum.TryParse<Scanner.TokenType>(c, out temptype);
+                        beforecomma = true;
                         if (isvalid)
                         {
                             temptoken.val = value;
