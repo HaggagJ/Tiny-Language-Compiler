@@ -217,7 +217,7 @@ namespace Compilers
                         c = "";
                         beforecomma = false;   
                     }
-                    if ( !beforecomma && (streamReader.Peek() == 10 || streamReader.Peek() == 13 || (char)streamReader.Peek() == '\t' ))
+                    if ( !beforecomma && (streamReader.Peek() == 10 || streamReader.Peek() == 13 || (char)streamReader.Peek() == '\t' || streamReader.Peek()== -1 ))
                         {               
                         isvalid=Enum.TryParse<Scanner.TokenType>(c, out temptype);
                         beforecomma = true;
@@ -226,7 +226,8 @@ namespace Compilers
                             temptoken.val = value;
                             temptoken.t = temptype;
                             Scanner.tokens.Add(temptoken);
-                            streamReader.Read();
+                            while(streamReader.Peek() == 10 || streamReader.Peek() == 13 || (char)streamReader.Peek() == '\t' || streamReader.Peek() == 32 /*spaces*/)
+                                streamReader.Read();
                             c = "";
                             value = "";
                         }
